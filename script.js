@@ -2,6 +2,7 @@ var timerCount = document.getElementById("timer-count");
 var button = document.getElementsByClassName("btn");
 var quizAnsList = document.getElementById("quiz-answer-list");
 var quizBody = document.getElementById("quiz-body");
+var finalResults = document.getElementById("final-results");
 
 var quizList = [
   "What color is a banana?",
@@ -38,6 +39,8 @@ var score = 0;
 var timer = 300;
 var secondsElasped = 0;
 var interval;
+var playerScore;
+var localTimer;
 
 function getTimer() {
   secondsLeft = timer - secondsElasped;
@@ -45,7 +48,6 @@ function getTimer() {
 }
 function stopTimer() {
   clearInterval(interval);
-  timerCount.textContent = "Finished!";
 }
 function renderTimer() {
   if (timerCount.textContent > 0) {
@@ -79,13 +81,14 @@ function displayQuiz() {
   quizAnsList.innerHTML = "";
   var quizQuestion = document.getElementById("quiz-question");
   var num = Math.floor(Math.random() * quizList.length);
+  document.getElementById("quiz-num").textContent = 9 - quizList.length + ".";
   quizQuestion.innerHTML = quizList[num];
   quizList.splice(num, 1);
 
   // Generate Answers
   for (var i = 0; i < ansList[num].length; i++) {
     var btn = document.createElement("button");
-    btn.setAttribute("class", "btn" + i);
+    btn.setAttribute("class", "btn");
     btn.textContent = ansList[num][i];
     quizAnsList.append(btn);
   }
@@ -95,35 +98,43 @@ function displayQuiz() {
 var btnNext = quizAnsList.addEventListener("click", function(event) {
   if (event.target.localName === "button") {
     // checkAnswer();
-
+    checkAnswer();
     nextQuestion();
   }
 });
 
-function finalResults() {}
-// function checkAnswer() {
-//   if (event.target.textContent == String) {
-//     console.log("winner");
-//   }
-// }
+// function showResults() {}
+function checkAnswer() {
+  if (correctAns.includes(event.target.textContent)) {
+    score++;
+    console.log("correct " + score);
+  } else {
+    console.log("wrong");
+  }
+}
 function endQuiz() {
   stopTimer();
   quizBody.setAttribute("style", "display: none");
-  console.log("fin");
+  var results = document.createElement("div");
+  results.setAttribute("class", "final-result");
+  results.textContent = "Your final score is: " + score + "/" + 8;
+  finalResults.append(results);
 }
+
 function nextQuestion() {
   if (quizList.length > 0) {
     quizAnsList.innerHTML = "";
     var quizQuestion = document.getElementById("quiz-question");
     var num = Math.floor(Math.random() * quizList.length);
+    document.getElementById("quiz-num").textContent = 9 - quizList.length + ".";
+
     quizQuestion.innerHTML = quizList[num];
     quizList.splice(num, 1);
 
     // Generate Answers
     for (var i = 0; i < ansList[num].length; i++) {
       var btn = document.createElement("button");
-      btn.setAttribute("class", "btn" + i);
-      btn.setAttribute("target", ansList[num][i]);
+      btn.setAttribute("class", "btn");
       btn.textContent = ansList[num][i];
       quizAnsList.append(btn);
     }
@@ -132,3 +143,12 @@ function nextQuestion() {
     endQuiz();
   }
 }
+
+document.getElementById("timer-icon").addEventListener("click", function() {
+  console.log(score);
+  console.log(timerCount.textContent);
+  localStorage.setItem("playerScore", score);
+  localStorage.setItem("localTimer", timerCount.textContent);
+  console.log(localStorage.getItem("playerScore"));
+  console.log(localStorage.getItem("localTimer"));
+});
