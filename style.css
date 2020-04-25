@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  height: 100%;
+}
+div {
+  margin: 12px;
+}
+header {
+}
+#high-score {
+}
+#timer {
+  display: flex;
+  text-align: center;
+  line-height: 50px;
+}
+#timer-icon {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+}
+#timer-count {
+  font-size: 45px;
+  margin: 5px;
+}
+
+#quiz-body {
+  height: 600px;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  padding-top: 50px;
+}
+#quiz-question {
+  font-size: 60px;
+}
+.btn {
+  height: 60px;
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: maroon;
+  color: white;
+  font-size: 25px;
+  display: block;
+}
