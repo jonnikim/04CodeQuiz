@@ -97,7 +97,6 @@ function displayQuiz() {
 }
 var btnNext = quizAnsList.addEventListener("click", function(event) {
   if (event.target.localName === "button") {
-    // checkAnswer();
     checkAnswer();
     nextQuestion();
   }
