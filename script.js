@@ -37,10 +37,14 @@ var answerSheet = [
   "5"
 ];
 // var highScores = ["sample,0"];
-var highScores = [];
-highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
-localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
-
+var highScores;
+if (localStorage.getItem("codeQuizScores") === null) {
+  highScores = [];
+  console.log(highScores);
+} else if (localStorage.getItem("codeQuizScores") != null) {
+  highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
+  console.log(highScores);
+}
 var score = 0;
 var secondsElasped = 0;
 var interval;
@@ -185,20 +189,18 @@ document.getElementById("high-score-btn").addEventListener("click", function() {
   if (highScore.style.display === "") {
     highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
     highScore.setAttribute("style", "display: initial");
-    if (highScores != null) {
-      for (var i = 0; i < highScores.length; i++) {
-        var div = document.createElement("div");
-        div.setAttribute("id", "high-score-name");
-        var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
-          i
-        ].split(",")[0];
-        var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
-          i
-        ].split(",")[1];
-        div.textContent =
-          i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
-        highScore.append(div);
-      }
+    for (var i = 0; i < highScores.length; i++) {
+      var div = document.createElement("div");
+      div.setAttribute("id", "high-score-name");
+      var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
+        i
+      ].split(",")[0];
+      var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
+        i
+      ].split(",")[1];
+      div.textContent =
+        i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
+      highScore.append(div);
     }
   } else {
     highScore.setAttribute("style", "display: ");
