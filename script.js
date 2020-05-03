@@ -36,8 +36,10 @@ var answerSheet = [
   "Yes",
   "5"
 ];
+// var highScores = ["sample,0"];
 var highScores = [];
 highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
+localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
 
 var score = 0;
 var secondsElasped = 0;
@@ -147,7 +149,7 @@ function endQuiz() {
     name = nameInput.value;
     var user;
     user = name + "," + score;
-    highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
+    // highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
     highScores.push(user);
     localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
   });
@@ -183,18 +185,20 @@ document.getElementById("high-score-btn").addEventListener("click", function() {
   if (highScore.style.display === "") {
     highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
     highScore.setAttribute("style", "display: initial");
-    for (var i = 0; i < highScores.length; i++) {
-      var div = document.createElement("div");
-      div.setAttribute("id", "high-score-name");
-      var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
-        i
-      ].split(",")[0];
-      var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
-        i
-      ].split(",")[1];
-      div.textContent =
-        i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
-      highScore.append(div);
+    if (highScores != null) {
+      for (var i = 0; i < highScores.length; i++) {
+        var div = document.createElement("div");
+        div.setAttribute("id", "high-score-name");
+        var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
+          i
+        ].split(",")[0];
+        var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
+          i
+        ].split(",")[1];
+        div.textContent =
+          i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
+        highScore.append(div);
+      }
     }
   } else {
     highScore.setAttribute("style", "display: ");
