@@ -177,20 +177,24 @@ function nextQuestion() {
 }
 
 document.getElementById("high-score-btn").addEventListener("click", function() {
-  highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
-  highScore.setAttribute("style", "display: initial");
-  for (var i = 0; i < highScores.length; i++) {
-    var div = document.createElement("div");
-    div.setAttribute("id", "high-score-name");
-    // var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[i];
-    var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
-      i
-    ].split(",")[0];
-    var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
-      i
-    ].split(",")[1];
-    div.textContent =
-      i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
-    highScore.append(div);
+  if (highScore.style.display === "") {
+    highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
+    highScore.setAttribute("style", "display: initial");
+    for (var i = 0; i < highScores.length; i++) {
+      var div = document.createElement("div");
+      div.setAttribute("id", "high-score-name");
+      // var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[i];
+      var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
+        i
+      ].split(",")[0];
+      var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
+        i
+      ].split(",")[1];
+      div.textContent =
+        i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
+      highScore.append(div);
+    }
+  } else {
+    highScore.setAttribute("style", "display: ");
   }
 });
