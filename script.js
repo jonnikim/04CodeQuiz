@@ -36,7 +36,6 @@ var answerSheet = [
   "Yes",
   "5"
 ];
-// var highScores = ["sample,0"];
 var highScores;
 if (localStorage.getItem("codeQuizScores") === null) {
   highScores = [];
@@ -87,7 +86,6 @@ btnStart.addEventListener("click", function() {
   highScore.setAttribute("style", "display: ");
 });
 
-// Generate Question
 function displayQuiz() {
   quizAnsList.innerHTML = "";
   var quizQuestion = document.getElementById("quiz-question");
@@ -96,7 +94,6 @@ function displayQuiz() {
   quizQuestion.innerHTML = quizList[num];
   quizList.splice(num, 1);
 
-  // Generate Answers
   for (var i = 0; i < ansList[num].length; i++) {
     var btn = document.createElement("button");
     btn.setAttribute("class", "btn");
@@ -113,7 +110,6 @@ var btnNext = quizAnsList.addEventListener("click", function(event) {
   }
 });
 
-// function showResults() {}
 function checkAnswer() {
   if (answerSheet.includes(event.target.textContent)) {
     score++;
@@ -153,9 +149,9 @@ function endQuiz() {
     name = nameInput.value;
     var user;
     user = name + "," + score;
-    // highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
     highScores.push(user);
     localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
+    displayHighScores();
   });
   againBtn.addEventListener("click", function() {
     location.reload();
@@ -184,8 +180,7 @@ function nextQuestion() {
     endQuiz();
   }
 }
-
-document.getElementById("high-score-btn").addEventListener("click", function() {
+function displayHighScores() {
   if (highScore.style.display === "") {
     highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
     highScore.setAttribute("style", "display: initial");
@@ -205,4 +200,7 @@ document.getElementById("high-score-btn").addEventListener("click", function() {
   } else {
     highScore.setAttribute("style", "display: ");
   }
-});
+}
+document
+  .getElementById("high-score-btn")
+  .addEventListener("click", displayHighScores);
