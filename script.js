@@ -78,7 +78,7 @@ var btnStart = document.getElementById("btn-start");
 btnStart.addEventListener("click", function() {
   startQuiz();
   btnStart.setAttribute("style", "display: none");
-  highScore.setAttribute("style", "display: none");
+  highScore.setAttribute("style", "display: ");
 });
 
 // Generate Question

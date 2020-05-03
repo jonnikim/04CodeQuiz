@@ -7,7 +7,6 @@ div {
 }
 
 #high-score-board {
-  /*min 875 width*/
   display: none;
   width: 40%;
   margin: 10px auto 10px;
