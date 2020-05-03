@@ -183,7 +183,6 @@ document.getElementById("high-score-btn").addEventListener("click", function() {
     for (var i = 0; i < highScores.length; i++) {
       var div = document.createElement("div");
       div.setAttribute("id", "high-score-name");
-      // var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[i];
       var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
         i
       ].split(",")[0];
