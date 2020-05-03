@@ -54,7 +54,16 @@ h3 {
 #quiz-num {
   margin: 12px;
 }
-
+#quiz-answer-check {
+  font-size: 22px;
+  text-align: center;
+}
+.correct {
+  background-color: rgb(112, 233, 207);
+}
+.incorrect {
+  background-color: red;
+}
 .btn {
   height: 60px;
   width: 80%;

@@ -4,6 +4,7 @@ var quizAnsList = document.getElementById("quiz-answer-list");
 var quizBody = document.getElementById("quiz-body");
 var finalResults = document.getElementById("final-results");
 var highScore = document.getElementById("high-score-board");
+var quizAnsCheck = document.getElementById("quiz-answer-check");
 
 var quizList = [
   "What color is a banana?",
@@ -25,7 +26,7 @@ var ansList = [
   ["Yes", "No"],
   ["1", "2", "3", "4", "5"]
 ];
-var correctAns = [
+var answerSheet = [
   "Yellow",
   "Fall",
   "16oz",
@@ -39,7 +40,6 @@ var highScores = [];
 highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
 
 var score = 0;
-var timer = 300;
 var secondsElasped = 0;
 var interval;
 var playerScore;
@@ -61,7 +61,7 @@ function renderTimer() {
 }
 
 function startTimer() {
-  timer = 300;
+  timer = 120;
   if (timer > 0) {
     interval = setInterval(function() {
       secondsElasped++;
@@ -109,11 +109,17 @@ var btnNext = quizAnsList.addEventListener("click", function(event) {
 
 // function showResults() {}
 function checkAnswer() {
-  if (correctAns.includes(event.target.textContent)) {
+  if (answerSheet.includes(event.target.textContent)) {
     score++;
     console.log("correct " + score);
+    quizAnsCheck.textContent = "Correct";
+    quizAnsCheck.removeAttribute("class", "incorrect");
+    quizAnsCheck.setAttribute("class", "correct");
   } else {
     console.log("wrong");
+    quizAnsCheck.textContent = "Incorrect";
+    quizAnsCheck.removeAttribute("class", "correct");
+    quizAnsCheck.setAttribute("class", "incorrect");
   }
 }
 function endQuiz() {
