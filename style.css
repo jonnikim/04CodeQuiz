@@ -5,9 +5,24 @@ body {
 div {
   margin: 12px;
 }
-header {
+
+#high-score-board {
+  /*min 875 width*/
+  display: none;
+  width: 40%;
+  margin: 10px auto 10px;
+  color: maroon;
+  font-size: 30px;
 }
-#high-score {
+h3 {
+  width: 40%;
+  margin: 10px auto 10px;
+  color: maroon;
+}
+#high-score-name {
+  width: 40%;
+  margin: 10px auto 10px;
+  color: maroon;
 }
 #timer {
   display: flex;
@@ -44,24 +59,38 @@ header {
 .btn {
   height: 60px;
   width: 80%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 10px auto;
   background-color: maroon;
   color: white;
   font-size: 25px;
   display: block;
 }
-#btn-start {
+
+.btn-short {
   height: 60px;
   width: 40%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 10px auto;
   background-color: maroon;
   color: white;
+  font-size: 25px;
+  display: block;
+}
+#high-score-btn {
+  height: 67px;
+  width: 143px;
+  margin: 10px 5px;
+  background-image: url("./Assets/high-score-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 13px;
+  color: black;
+  display: block;
+}
+.name-input {
+  height: 60px;
+  width: 40%;
+  margin: 10px auto;
   font-size: 25px;
   display: block;
 }

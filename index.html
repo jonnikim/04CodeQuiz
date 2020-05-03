@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Code Quiz</title>
+  </head>
+  <body>
     <header>
-      <div><a href="" id="high-score">Click to see High Score</a></div>
-
+      <button id="high-score-btn"></button>
       <div id="timer">
         <img id="timer-icon" src="Assets/timer-icon.png" /><span
           id="timer-count"
@@ -16,10 +17,11 @@
         >
       </div>
     </header>
-  </head>
-  <body>
+    <div id="high-score-board">
+      <h3>High Scores (Chronological):</h3>
+    </div>
     <div id="quiz-body">
-      <button id="btn-start">Start Quiz!</button>
+      <button id="btn-start" class="btn-short">Start Quiz!</button>
       <div id="quiz-q">
         <span id="quiz-num"></span>
         <div id="quiz-question"></div>

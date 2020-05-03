@@ -3,6 +3,7 @@ var button = document.getElementsByClassName("btn");
 var quizAnsList = document.getElementById("quiz-answer-list");
 var quizBody = document.getElementById("quiz-body");
 var finalResults = document.getElementById("final-results");
+var highScore = document.getElementById("high-score-board");
 
 var quizList = [
   "What color is a banana?",
@@ -34,6 +35,8 @@ var correctAns = [
   "Yes",
   "5"
 ];
+var highScores = [];
+highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
 
 var score = 0;
 var timer = 300;
@@ -58,6 +61,7 @@ function renderTimer() {
 }
 
 function startTimer() {
+  timer = 300;
   if (timer > 0) {
     interval = setInterval(function() {
       secondsElasped++;
@@ -74,6 +78,7 @@ var btnStart = document.getElementById("btn-start");
 btnStart.addEventListener("click", function() {
   startQuiz();
   btnStart.setAttribute("style", "display: none");
+  highScore.setAttribute("style", "display: none");
 });
 
 // Generate Question
@@ -118,6 +123,34 @@ function endQuiz() {
   results.setAttribute("class", "final-result");
   results.textContent = "Your final score is: " + score + "/" + 8;
   finalResults.append(results);
+  var resultBoard = document.createElement("div");
+  resultBoard.setAttribute("class", "result-board");
+  finalResults.append(resultBoard);
+  var nameInput = document.createElement("input");
+  nameInput.setAttribute("class", "name-input");
+  nameInput.setAttribute("placeholder", "Input Name");
+  resultBoard.append(nameInput);
+  var saveBtn = document.createElement("button");
+  saveBtn.setAttribute("class", "btn-short");
+  saveBtn.innerHTML = "Save Score";
+  resultBoard.append(saveBtn);
+  var againBtn = document.createElement("button");
+  againBtn.setAttribute("class", "btn-short");
+  againBtn.innerHTML = "Play Again!";
+  resultBoard.append(againBtn);
+  saveBtn.addEventListener("click", function() {
+    var name;
+    name = nameInput.value;
+    var user;
+    user = name + "," + score;
+    highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
+    highScores.push(user);
+    localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
+    console.log(localStorage.getItem("codeQuizScores"));
+  });
+  againBtn.addEventListener("click", function() {
+    location.reload();
+  });
 }
 
 function nextQuestion() {
@@ -143,11 +176,21 @@ function nextQuestion() {
   }
 }
 
-document.getElementById("timer-icon").addEventListener("click", function() {
-  console.log(score);
-  console.log(timerCount.textContent);
-  localStorage.setItem("playerScore", score);
-  localStorage.setItem("localTimer", timerCount.textContent);
-  console.log(localStorage.getItem("playerScore"));
-  console.log(localStorage.getItem("localTimer"));
+document.getElementById("high-score-btn").addEventListener("click", function() {
+  highScore.querySelectorAll("#high-score-name").forEach(n => n.remove());
+  highScore.setAttribute("style", "display: initial");
+  for (var i = 0; i < highScores.length; i++) {
+    var div = document.createElement("div");
+    div.setAttribute("id", "high-score-name");
+    // var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[i];
+    var highScoreName = JSON.parse(localStorage.getItem("codeQuizScores"))[
+      i
+    ].split(",")[0];
+    var highScoreValue = JSON.parse(localStorage.getItem("codeQuizScores"))[
+      i
+    ].split(",")[1];
+    div.textContent =
+      i + 1 + ". " + highScoreName + " - " + highScoreValue + " points.";
+    highScore.append(div);
+  }
 });
