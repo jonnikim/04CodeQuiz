@@ -150,7 +150,6 @@ function endQuiz() {
     highScores = JSON.parse(localStorage.getItem("codeQuizScores"));
     highScores.push(user);
     localStorage.setItem("codeQuizScores", JSON.stringify(highScores));
-    console.log(localStorage.getItem("codeQuizScores"));
   });
   againBtn.addEventListener("click", function() {
     location.reload();
