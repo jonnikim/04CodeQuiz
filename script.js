@@ -111,12 +111,10 @@ var btnNext = quizAnsList.addEventListener("click", function(event) {
 function checkAnswer() {
   if (answerSheet.includes(event.target.textContent)) {
     score++;
-    console.log("correct " + score);
     quizAnsCheck.textContent = "Correct";
     quizAnsCheck.removeAttribute("class", "incorrect");
     quizAnsCheck.setAttribute("class", "correct");
   } else {
-    console.log("wrong");
     quizAnsCheck.textContent = "Incorrect";
     quizAnsCheck.removeAttribute("class", "correct");
     quizAnsCheck.setAttribute("class", "incorrect");
